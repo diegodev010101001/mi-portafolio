@@ -15,7 +15,7 @@ const Curriculum = () => {
                   <h3>{experiencia.nombre}</h3>
                   <p>{experiencia.direccion}</p>
                   <div className='mask-curriculum'>
-                    <img src= {`/images/${experiencia.imagen}`} />
+                    <img src= {`/images/${experiencia.imagen}`} alt='imagen'/>
                   </div>      
             </div>
         )
@@ -32,7 +32,7 @@ const Curriculum = () => {
           <div className='conocimientos-item'>
             <div className='conocimientos-header'>
               <h3>{conocimiento.nombre}</h3>
-              <img className='mask-conocimiento' src={`/images/${conocimiento.imagen}`} />
+              <img className='mask-conocimiento' src={`/images/${conocimiento.imagen}`} alt='imagen'/>
             </div>
             <p>{conocimiento.contenido}</p>
           </div>
@@ -53,7 +53,7 @@ const Curriculum = () => {
                 
                 <h4>Periodo: {educacion.periodo}</h4>
                 <div className='mask-educacion'>
-                  <img src={`/images/${educacion.imagen}`} />
+                  <img src={`/images/${educacion.imagen}`} alt='imagen'/>
                 </div>
                 
 

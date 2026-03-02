@@ -22,7 +22,7 @@ const Portafolio = () => {
               <p><strong>Tecnologías:</strong> {trabajo.tecnologias}</p>
               <p><strong>Categoría:</strong> {trabajo.categorias}</p>
               <div className='mask'>
-                <img src={'/images/' + trabajo.id + '.png'}/>
+                <img src={'/images/' + trabajo.id + '.png'} alt='imagen'/>
               </div>
             </article>
           )
