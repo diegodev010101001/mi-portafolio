@@ -41,7 +41,7 @@
    RESET
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden; overflow-y: auto; }
 body {
   font-family: var(--font-body);
   background: var(--color-bg);
@@ -49,6 +49,7 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-y: visible;
 }
 img { max-width: 100%; display: block; }
 a { text-decoration: none; }
@@ -192,6 +193,11 @@ button { font-family: inherit; }
 }
 .logo-acc { color: var(--color-acc); }
 
+/* Portal nav: hidden on desktop, shown as overlay on mobile */
+.nav { display: none; }
+
+.nav-desktop { display: flex; }
+
 .nav-list {
   display: flex;
   align-items: center;
@@ -253,13 +259,14 @@ button { font-family: inherit; }
 
 @media (max-width: 768px) {
   .hamburger { display: flex; }
+  .nav-desktop { display: none; }
   .nav {
+    display: flex;
     position: fixed;
     inset: 0;
     background: rgba(6,6,15,0.97);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;

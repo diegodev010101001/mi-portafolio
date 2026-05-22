@@ -54,6 +54,21 @@ const HeaderNav = () => {
             <span className="logo-acc">Dieg</span>oFdezC<span className="logo-acc">ode</span>
           </Link>
 
+          <nav className="nav-desktop">
+            <ul className="nav-list">
+              {NAV_LINKS.map(({ to, label }) => (
+                <li key={to}>
+                  <NavLink
+                    to={to}
+                    className={({ isActive }) => isActive ? 'active' : ''}
+                  >
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
           <button
             className={`hamburger${menuOpen ? ' open' : ''}`}
             onClick={toggleMenu}
