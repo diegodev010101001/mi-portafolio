@@ -68,9 +68,6 @@ const Inicio = () => {
           <Link to="/contacto" className="btn btn-primary">
             Trabajemos juntos
           </Link>
-          <Link to="/portafolio" className="btn btn-secondary">
-            Ver proyectos →
-          </Link>
         </motion.div>
       </motion.div>
 

@@ -1,84 +1,157 @@
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiMapPin, FiSend } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
 
 const FADE = {
-  initial:    { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  viewport:   { once: true, margin: '-50px' },
+  viewport: { once: true, margin: '-50px' },
   transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
 };
 
-const INITIAL_FORM = { nombre: '', apellidos: '', email: '', mensaje: '' };
+const INITIAL_FORM = {
+  nombre: '',
+  apellidos: '',
+  email: '',
+  mensaje: '',
+};
 
 const Contacto = () => {
-  const [form, setForm]   = useState(INITIAL_FORM);
-  const [sent, setSent]   = useState(false);
-  const [busy, setBusy]   = useState(false);
+
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   const handleChange = useCallback((e) => {
+
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
   }, []);
 
-  const handleSubmit = useCallback((e) => {
+  const handleSubmit = useCallback(async (e) => {
+
     e.preventDefault();
+
     setBusy(true);
-    const subject = `Contacto de ${form.nombre} ${form.apellidos}`;
-    const body    = `Nombre: ${form.nombre} ${form.apellidos}\nEmail: ${form.email}\n\n${form.mensaje}`;
-    window.location.href =
-      `mailto:diegofernandezmar@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setTimeout(() => {
+
+    try {
+
+      await emailjs.send(
+        'service_sryzzv3',
+        'template_npkw4bi',
+        {
+          nombre: form.nombre,
+          apellidos: form.apellidos,
+          email: form.email,
+          mensaje: form.mensaje,
+        },
+        'c3MxxEYu77yHDdjTO'
+      );
+
       setSent(true);
-      setBusy(false);
       setForm(INITIAL_FORM);
-    }, 800);
+
+      setTimeout(() => {
+        setSent(false);
+      }, 5000);
+
+    } catch (error) {
+
+      console.error('Error al enviar:', error);
+
+      
+      alert(JSON.stringify(error));
+
+    } finally {
+
+      setBusy(false);
+
+    }
+
   }, [form]);
 
   return (
     <div className="page-wrap">
+
       <section className="page-section">
+
         <div className="contact-wrapper">
 
-          {/* Info */}
-          <motion.div className="contact-info" {...FADE}>
-            <span className="section-label">Hablemos</span>
+          {/* Información */}
+          <motion.div
+            className="contact-info"
+            {...FADE}
+          >
+
+            <span className="section-label">
+              Hablemos
+            </span>
+
             <h1 className="section-title">
-              ¿Tienes un proyecto<br />
-              <span className="gradient-text">en mente?</span>
+              ¿Tienes un proyecto
+              <br />
+              <span className="gradient-text">
+                en mente?
+              </span>
             </h1>
+
             <p>
               Estoy disponible para proyectos freelance y colaboraciones.
               Cuéntame tu idea y la convertimos en realidad.
             </p>
+
             <div className="contact-meta">
+
               <div className="contact-meta-item">
                 <FiMail />
-                <span>diegofernandezmar@hotmail.com</span>
+                <span>
+                  diegofernandezmar@hotmail.com
+                </span>
               </div>
+
               <div className="contact-meta-item">
                 <FiMapPin />
-                <span>Aguascalientes, México</span>
+                <span>
+                  Aguascalientes, México
+                </span>
               </div>
+
             </div>
+
           </motion.div>
 
-          {/* Form */}
+          {/* Formulario */}
           <motion.form
             className="contact-form"
             onSubmit={handleSubmit}
             {...FADE}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            transition={{
+              duration: 0.75,
+              ease: [0.16, 1, 0.3, 1],
+              delay: 0.15,
+            }}
           >
+
             {sent && (
               <div className="form-success">
-                ¡Mensaje enviado! Me pondré en contacto contigo pronto.
+                ¡Mensaje enviado correctamente!
               </div>
             )}
 
             <div className="form-row">
+
               <div className="form-group">
-                <label htmlFor="nombre">Nombre</label>
+
+                <label htmlFor="nombre">
+                  Nombre
+                </label>
+
                 <input
                   id="nombre"
                   name="nombre"
@@ -89,9 +162,15 @@ const Contacto = () => {
                   onChange={handleChange}
                   required
                 />
+
               </div>
+
               <div className="form-group">
-                <label htmlFor="apellidos">Apellidos</label>
+
+                <label htmlFor="apellidos">
+                  Apellidos
+                </label>
+
                 <input
                   id="apellidos"
                   name="apellidos"
@@ -102,11 +181,17 @@ const Contacto = () => {
                   onChange={handleChange}
                   required
                 />
+
               </div>
+
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+
+              <label htmlFor="email">
+                Email
+              </label>
+
               <input
                 id="email"
                 name="email"
@@ -117,10 +202,15 @@ const Contacto = () => {
                 onChange={handleChange}
                 required
               />
+
             </div>
 
             <div className="form-group">
-              <label htmlFor="mensaje">Mensaje</label>
+
+              <label htmlFor="mensaje">
+                Mensaje
+              </label>
+
               <textarea
                 id="mensaje"
                 name="mensaje"
@@ -131,6 +221,7 @@ const Contacto = () => {
                 required
                 rows={5}
               />
+
             </div>
 
             <motion.button
@@ -140,13 +231,19 @@ const Contacto = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
+
               <FiSend />
+
               {busy ? 'Enviando...' : 'Enviar mensaje'}
+
             </motion.button>
+
           </motion.form>
 
         </div>
+
       </section>
+
     </div>
   );
 };

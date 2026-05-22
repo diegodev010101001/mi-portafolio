@@ -31,7 +31,7 @@ const HeaderNav = () => {
       <div className="header-inner">
 
         <Link to="/inicio" className="logo-text" onClick={closeMenu}>
-          <span className="logo-acc">D</span>iego<span className="logo-acc">.</span>
+          <span className="logo-acc">Dieg</span>oFdezC<span className="logo-acc">ode</span>
         </Link>
 
         <button

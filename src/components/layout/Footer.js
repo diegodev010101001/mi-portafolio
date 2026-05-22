@@ -12,7 +12,7 @@ const Footer = () => (
     <div className="footer-inner">
 
       <span className="footer-brand">
-        <span style={{ color: 'var(--color-acc)' }}>D</span>iego<span style={{ color: 'var(--color-acc)' }}>.</span>
+        <span style={{ color: 'var(--color-acc)' }}>Dieg</span>goFdezC<span style={{ color: 'var(--color-acc)' }}>ode</span>
       </span>
 
       <p className="footer-copy">
