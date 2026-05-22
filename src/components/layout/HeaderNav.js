@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import { NavLink, Link } from 'react-router-dom';
 
 const NAV_LINKS = [
@@ -26,42 +27,48 @@ const HeaderNav = () => {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
   const toggleMenu = useCallback(() => setMenuOpen(v => !v), []);
 
+  const mobileNav = ReactDOM.createPortal(
+    <nav className={`nav${menuOpen ? ' nav-open' : ''}`} aria-hidden={!menuOpen}>
+      <ul className="nav-list" onClick={closeMenu}>
+        {NAV_LINKS.map(({ to, label }) => (
+          <li key={to}>
+            <NavLink
+              to={to}
+              className={({ isActive }) => isActive ? 'active' : ''}
+            >
+              {label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>,
+    document.body
+  );
+
   return (
-    <header className={`header${scrolled ? ' scrolled' : ''}`}>
-      <div className="header-inner">
+    <>
+      <header className={`header${scrolled ? ' scrolled' : ''}`}>
+        <div className="header-inner">
 
-        <Link to="/inicio" className="logo-text" onClick={closeMenu}>
-          <span className="logo-acc">Dieg</span>oFdezC<span className="logo-acc">ode</span>
-        </Link>
+          <Link to="/inicio" className="logo-text" onClick={closeMenu}>
+            <span className="logo-acc">Dieg</span>oFdezC<span className="logo-acc">ode</span>
+          </Link>
 
-        <button
-          className={`hamburger${menuOpen ? ' open' : ''}`}
-          onClick={toggleMenu}
-          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+          <button
+            className={`hamburger${menuOpen ? ' open' : ''}`}
+            onClick={toggleMenu}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
 
-        <nav className={`nav${menuOpen ? ' nav-open' : ''}`} aria-hidden={!menuOpen}>
-          <ul className="nav-list" onClick={closeMenu}>
-            {NAV_LINKS.map(({ to, label }) => (
-              <li key={to}>
-                <NavLink
-                  to={to}
-                  className={({ isActive }) => isActive ? 'active' : ''}
-                >
-                  {label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-      </div>
-    </header>
+        </div>
+      </header>
+      {mobileNav}
+    </>
   );
 };
 
