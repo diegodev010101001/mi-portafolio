@@ -2,8 +2,8 @@ import MisRutas from './router/MisRutas';
 
 function App() {
   return (
-    <div className='layout'>
-      <MisRutas></MisRutas>
+    <div className="layout">
+      <MisRutas />
     </div>
   );
 }

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl *)",
+      "Bash(npx playwright *)",
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash(cd /tmp)",
+      "Bash(npm install *)",
+      "Bash(node verify_portfolio.js)",
+      "Read(//c/tmp/**)",
+      "Bash(dir \"C:\\\\Users\\\\krill\\\\AppData\\\\Local\\\\Temp\\\\*.png\")",
+      "Bash(node -e \"require\\('playwright'\\); console.log\\('ok'\\)\")"
+    ]
+  }
+}

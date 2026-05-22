@@ -1,68 +1,66 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FiMenu } from "react-icons/fi"; // icono hamburguesa
+import React, { useState, useEffect, useCallback } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+
+const NAV_LINKS = [
+  { to: '/inicio',     label: 'Inicio' },
+  { to: '/servicios',  label: 'Servicios' },
+  { to: '/curriculum', label: 'Curriculum' },
+  { to: '/contacto',   label: 'Contacto' },
+];
 
 const HeaderNav = () => {
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
 
-  const [menuAbierto, setMenuAbierto] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  const cerrarMenu = () => {
-    setMenuAbierto(false);
-  };
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const toggleMenu = useCallback(() => setMenuOpen(v => !v), []);
 
   return (
-    <header className='header'>
+    <header className={`header${scrolled ? ' scrolled' : ''}`}>
+      <div className="header-inner">
 
-      <img
-        className='logo'
-        src="/images/milogo.png"
-        alt="Logo Diego Fernández Web"
-      />
+        <Link to="/inicio" className="logo-text" onClick={closeMenu}>
+          <span className="logo-acc">D</span>iego<span className="logo-acc">.</span>
+        </Link>
 
-      {/* ICONO HAMBURGUESA */}
-      <button
-        className='abrir-menu'
-        onClick={() => setMenuAbierto(true)}
-      >
-        <FiMenu size={37} />
-      </button>
+        <button
+          className={`hamburger${menuOpen ? ' open' : ''}`}
+          onClick={toggleMenu}
+          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
 
-      {/* NAV */}
-      <nav className={`nav ${menuAbierto ? "visible" : ""}`}>
+        <nav className={`nav${menuOpen ? ' nav-open' : ''}`} aria-hidden={!menuOpen}>
+          <ul className="nav-list" onClick={closeMenu}>
+            {NAV_LINKS.map(({ to, label }) => (
+              <li key={to}>
+                <NavLink
+                  to={to}
+                  className={({ isActive }) => isActive ? 'active' : ''}
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-        <ul className='nav-list' onClick={cerrarMenu}>
-
-          <li>
-            <NavLink to='/inicio'
-              className={({ isActive }) => isActive ? 'active' : ''}>
-              Inicio
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to='/servicios'
-              className={({ isActive }) => isActive ? 'active' : ''}>
-              Servicios
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to='/curriculum'
-              className={({ isActive }) => isActive ? 'active' : ''}>
-              Curriculum
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to='/contacto'
-              className={({ isActive }) => isActive ? 'active' : ''}>
-              Contacto
-            </NavLink>
-          </li>
-
-        </ul>
-      </nav>
-
+      </div>
     </header>
   );
 };
