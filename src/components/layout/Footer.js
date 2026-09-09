@@ -1,10 +1,10 @@
 import React from 'react';
-import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
 
 const SOCIAL = [
-  { href: 'https://github.com/diegodev010101001', icon: <FiGithub />,  label: 'GitHub'   },
-  { href: 'https://linkedin.com',                  icon: <FiLinkedin />, label: 'LinkedIn' },
-  { href: 'https://twitter.com',                   icon: <FiTwitter />,  label: 'Twitter'  },
+  { href: 'https://github.com/diegodev010101001', icon: <FiGithub />,    label: 'GitHub'    },
+  { href: 'https://www.linkedin.com/in/diego-fernandez-martinez-6bb931422?utm_source=share_via&utm_content=profile&utm_medium=member_ios', icon: <FiLinkedin />,  label: 'LinkedIn'  },
+  { href: 'https://www.instagram.com/_d.fdez_0/', icon: <FiInstagram />, label: 'Instagram' },
 ];
 
 const Footer = () => (

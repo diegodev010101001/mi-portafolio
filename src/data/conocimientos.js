@@ -22,6 +22,12 @@ export const conocimientos = [
         "nombre" : "React",
         "contenido" : "Tengo experiencia utilizando React para el desarrollo de interfaces modernas basadas en componentes reutilizables. Comprendo el manejo de estados, props y el flujo de datos dentro de aplicaciones SPA, lo que me permite construir aplicaciones escalables, mantenibles y eficientes.",
         "imagen" : "react.png"
+    },
+    {
+        "id" : "5",
+        "nombre" : "NextJs",
+        "contenido" : "Cuento con conocimientos en este MetaFramework para hacer que tus paginas sean mas rapidas en cualquier dispositivo y aparezcan posicionadas en las primeras paginas de Google",
+        "imagen" : "Next.png"
     }
     
 

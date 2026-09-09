@@ -9,7 +9,12 @@
       "Bash(node verify_portfolio.js)",
       "Read(//c/tmp/**)",
       "Bash(dir \"C:\\\\Users\\\\krill\\\\AppData\\\\Local\\\\Temp\\\\*.png\")",
-      "Bash(node -e \"require\\('playwright'\\); console.log\\('ok'\\)\")"
+      "Bash(node -e \"require\\('playwright'\\); console.log\\('ok'\\)\")",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; foreach \\($f in @\\('Next.png','html.png','css.png','react.png','javascript.png'\\)\\) { $p = \"C:\\\\Users\\\\krill\\\\Desktop\\\\mi-portafolio\\\\my-first-portafolio\\\\public\\\\images\\\\$f\"; $img = [System.Drawing.Image]::FromFile\\($p\\); Write-Output \"$f -> $\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\) })",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\krill\\\\Desktop\\\\mi-portafolio\\\\my-first-portafolio\\\\public\\\\images\\\\Next.png\"\\); Write-Output \"$\\($img.Width\\)x$\\($img.Height\\) - PixelFormat: $\\($img.PixelFormat\\)\"; $img.Dispose\\(\\))",
+      "WebFetch(domain:asistencia-para-gas-sc.vercel.app)",
+      "Bash(npx react-scripts *)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\krill\\\\Desktop\\\\mi-portafolio\\\\my-first-portafolio\\\\public\\\\images\\\\Asistencia.png\"\\); Write-Output \"$\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\))"
     ]
   }
 }

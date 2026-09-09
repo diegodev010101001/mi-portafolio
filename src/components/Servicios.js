@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiLayout, FiCode, FiBarChart2 } from 'react-icons/fi';
+import Proyectos from './Proyectos';
 
 const SERVICES = [
   {
@@ -64,6 +65,10 @@ const Servicios = () => (
       </div>
 
     </section>
+
+    <div className="section-bg-alt">
+      <Proyectos />
+    </div>
   </div>
 );
 
