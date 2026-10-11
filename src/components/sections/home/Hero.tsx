@@ -7,35 +7,53 @@ import { Icon } from "@/components/ui/Icon";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { hero } from "@/data/home";
 import { whatsappMessages } from "@/data/whatsapp-messages";
+import { cn } from "@/lib/utils";
 import { HeroVisual } from "./HeroVisual";
 
 /**
  * Arriba del pliegue: todo se anima con CSS (animate-fade-up), nada depende de JavaScript.
- * En móvil el texto llena la primera pantalla (svh, para que no lo afecte la barra del
- * navegador) y las maquetas quedan completas en la siguiente. En celulares bajitos
- * (variante short-phone) se reducen tamaños y espacios para que quepan los dos botones.
+ *
+ * El hero mide el alto de la pantalla menos el header (svh) y su contenido empieza arriba,
+ * con una separación corta bajo el header; el espacio que sobre queda al final.
+ * - Celular y tableta vertical: el texto llena la primera pantalla y las maquetas van después.
+ * - hero-tall (tableta vertical alta): texto y maquetas caben juntos en la primera pantalla.
+ * - hero-split (horizontal ancho): dos columnas, con las maquetas limitadas al alto disponible.
+ * Título y espacios se ajustan al alto (svh) para que todo quepa en laptops bajitas; en
+ * celulares bajitos (short-phone) se compacta un poco más.
  */
+const gapSmall = "mt-[clamp(1rem,3svh,1.5rem)] short-phone:mt-4";
+const gapLarge = "mt-[clamp(1.25rem,4.5svh,2.25rem)] short-phone:mt-6";
 const compactButton = "short-phone:py-2.5 short-phone:text-sm";
 
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden pt-header">
       <HeroBackdrop />
-      <Container className="grid items-center lg:min-h-[calc(100svh-var(--spacing-header))] lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:py-16">
-        <div className="flex min-h-[calc(100svh-var(--spacing-header))] flex-col justify-center py-10 short-phone:py-4 lg:min-h-0 lg:py-0">
+      <Container className="hero-tall:min-h-[calc(100svh-var(--spacing-header))] hero-split:grid hero-split:min-h-[calc(100svh-var(--spacing-header))] hero-split:grid-cols-[1.05fr_1fr] hero-split:content-start hero-split:items-center hero-split:gap-10 hero-split:pt-[clamp(2.5rem,6svh,4rem)] hero-split:pb-10">
+        <div className="flex min-h-[calc(100svh-var(--spacing-header))] flex-col pt-[clamp(1.5rem,4svh,2.5rem)] pb-6 short-phone:pt-6 hero-tall:min-h-0 hero-split:min-h-0 hero-split:py-0">
           <CodeTag
             primary={hero.badge.role}
             secondary={hero.badge.location}
             className="animate-fade-up self-start"
           />
           {/* Sin animación de entrada: el título se pinta completo desde el primer momento. */}
-          <h1 className="mt-6 font-display text-[2.6rem] leading-[1.05] font-bold tracking-tight text-balance short-phone:mt-4 short-phone:text-[2rem] sm:text-6xl xl:text-7xl">
+          <h1 className={cn("font-display text-hero font-bold tracking-tight text-balance", gapSmall)}>
             <HighlightedTitle title={hero.title} highlight={hero.highlight} live />
           </h1>
-          <p className="mt-6 max-w-xl animate-fade-up text-lg text-pretty text-ink-dim [animation-delay:160ms] short-phone:mt-4 short-phone:text-base short-phone:leading-normal">
+          <p
+            className={cn(
+              "max-w-xl animate-fade-up text-lg text-pretty text-ink-dim [animation-delay:160ms] short-phone:text-base short-phone:leading-normal",
+              gapSmall,
+            )}
+          >
             {hero.subtitle}
           </p>
-          <div className="mt-9 flex animate-fade-up flex-col gap-3 [animation-delay:240ms] short-phone:mt-6 short-phone:gap-2.5 sm:flex-row">
+          <div
+            className={cn(
+              "flex animate-fade-up flex-col gap-3 [animation-delay:240ms] short-phone:gap-2.5 sm:flex-row",
+              gapLarge,
+            )}
+          >
             <Button href={hero.primaryCta.href} size="lg" className={compactButton}>
               {hero.primaryCta.label}
             </Button>
@@ -46,7 +64,12 @@ export function Hero() {
               className={compactButton}
             />
           </div>
-          <ul className="mt-9 flex animate-fade-up flex-col gap-x-6 gap-y-3 text-sm text-ink-dim [animation-delay:320ms] short-phone:mt-6 short-phone:gap-y-2 sm:flex-row sm:flex-wrap">
+          <ul
+            className={cn(
+              "flex animate-fade-up flex-col gap-x-6 gap-y-3 text-sm text-ink-dim [animation-delay:320ms] short-phone:gap-y-2 sm:flex-row sm:flex-wrap",
+              gapLarge,
+            )}
+          >
             {hero.trustSignals.map((signal) => (
               <li key={signal.label} className="flex items-center gap-2">
                 <Icon name={signal.icon} className="size-4 text-cyan" />
