@@ -9,7 +9,7 @@ export const homeSeo = {
 };
 
 export const hero = {
-  badge: "Desarrollador Web · Aguascalientes, México",
+  badge: { role: "Desarrollador Web", location: "Aguascalientes, México" },
   title: "Páginas web que le traen clientes a tu negocio",
   highlight: "clientes a tu negocio",
   subtitle:
