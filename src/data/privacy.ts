@@ -8,7 +8,7 @@ import type { Heading, PrivacySection } from "@/types";
 export const privacySeo = {
   title: "Aviso de privacidad",
   description:
-    "Aviso de privacidad integral de Diego Fernández Web: qué datos personales se recaban en el formulario de contacto, para qué se usan y cómo ejercer tus derechos ARCO.",
+    `Aviso de privacidad integral de ${siteConfig.name}: qué datos personales se recaban en el formulario de contacto, para qué se usan y cómo ejercer tus derechos ARCO.`,
 };
 
 export const privacyHero = {

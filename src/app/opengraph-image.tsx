@@ -19,12 +19,10 @@ const colors = {
 const gradient = `linear-gradient(135deg, ${colors.accent} 0%, ${colors.violet} 55%, ${colors.cyan} 100%)`;
 
 export default async function OpenGraphImage() {
-  const [spaceGrotesk, inter, logo] = await Promise.all([
+  const [spaceGrotesk, inter] = await Promise.all([
     readFile(join(process.cwd(), "src/assets/fonts/SpaceGrotesk-Bold.woff")),
     readFile(join(process.cwd(), "src/assets/fonts/Inter-Medium.woff")),
-    readFile(join(process.cwd(), "public/icons/icon-512.png")),
   ]);
-  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -42,10 +40,9 @@ export default async function OpenGraphImage() {
           fontFamily: "Inter",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse solo admite <img> */}
-          <img src={logoSrc} alt="" width={88} height={88} style={{ borderRadius: 20 }} />
-          <div style={{ fontFamily: "Space Grotesk", fontSize: 40 }}>{siteConfig.name}</div>
+        <div style={{ display: "flex", fontFamily: "Space Grotesk", fontSize: 52, letterSpacing: -1.5 }}>
+          <span style={{ color: colors.accent }}>{siteConfig.wordmark.accent}</span>
+          <span>{siteConfig.wordmark.rest}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div

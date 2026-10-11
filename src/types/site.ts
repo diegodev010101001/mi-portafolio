@@ -1,4 +1,3 @@
-import type { ImageAsset } from "./content";
 import type { SocialIconName } from "./icon";
 
 export interface SocialLink {
@@ -9,6 +8,7 @@ export interface SocialLink {
 
 export interface SiteConfig {
   name: string;
+  wordmark: { accent: string; rest: string };
   owner: string;
   url: string;
   locale: string;
@@ -21,6 +21,5 @@ export interface SiteConfig {
   phoneE164: string;
   whatsappNumber: string;
   email: string;
-  logo: ImageAsset;
   socials: SocialLink[];
 }

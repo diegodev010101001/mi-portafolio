@@ -7,7 +7,7 @@ const BACKGROUND_COLOR = "#06060f";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: siteConfig.name,
-    short_name: siteConfig.owner,
+    short_name: siteConfig.name,
     description: siteConfig.description,
     lang: siteConfig.locale,
     start_url: "/",

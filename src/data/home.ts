@@ -1,15 +1,15 @@
 import type { CtaContent, Feature, Heading, Problem } from "@/types";
+import { siteConfig } from "@/config/site";
 import { whatsappMessages } from "./whatsapp-messages";
 
 export const homeSeo = {
-  title: "Páginas web para negocios en Aguascalientes y todo México",
+  title: `Páginas web para negocios en Aguascalientes | ${siteConfig.owner} · ${siteConfig.name}`,
   description:
     "Diseño y desarrollo páginas web a la medida para negocios: sitios profesionales y sitios con sistema de citas en línea. Trato directo, desde Aguascalientes para cualquier ciudad o país.",
 };
 
 export const hero = {
-  badge: "Desarrollador web freelance · Aguascalientes, México · Clientes en todo el mundo",
-  badgeShort: "Desarrollador web freelance",
+  badge: "Desarrollador Web · Aguascalientes, México",
   title: "Páginas web que le traen clientes a tu negocio",
   highlight: "clientes a tu negocio",
   subtitle:

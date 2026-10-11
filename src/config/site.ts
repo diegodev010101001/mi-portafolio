@@ -1,7 +1,9 @@
 import type { SiteConfig } from "@/types";
 
 export const siteConfig = {
-  name: "Diego Fernández Web",
+  name: "DiegoDev",
+  /** Partes del logotipo de texto: la primera va en el color de acento. */
+  wordmark: { accent: "Diego", rest: "Dev" },
   owner: "Diego Fernández",
   url: "https://diegofdev.vercel.app",
   locale: "es-MX",
@@ -16,12 +18,6 @@ export const siteConfig = {
   phoneE164: "+524491559359",
   whatsappNumber: "524491559359",
   email: "diegofernandezmar@hotmail.com",
-  logo: {
-    src: "/icons/icon-192.png",
-    alt: "Logotipo de Diego Fernández Web",
-    width: 192,
-    height: 192,
-  },
   socials: [
     { label: "GitHub", href: "https://github.com/diegodev010101001", icon: "github" },
     {
