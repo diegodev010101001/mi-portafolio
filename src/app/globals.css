@@ -123,6 +123,10 @@
 
 /* Celulares de pantalla bajita (iPhone SE, 360×640): el hero se compacta para que quepan los botones. */
 @custom-variant short-phone (@media (max-height: 700px) and (max-width: 639px));
+/* Hero en dos columnas (texto + maquetas): pantallas anchas en horizontal. */
+@custom-variant hero-split (@media (min-width: 1024px) and (orientation: landscape));
+/* Tabletas en vertical con altura de sobra: texto y maquetas caben juntos en la primera pantalla. */
+@custom-variant hero-tall (@media (min-width: 740px) and (min-height: 1000px) and (orientation: portrait));
 
 :root {
   --gradient-brand: linear-gradient(
@@ -232,6 +236,21 @@
     title-shine 5.5s ease-in-out infinite;
   @media (prefers-reduced-motion: reduce) {
     animation: none;
+  }
+}
+
+/*
+ * Tamaño del título del hero: depende del ancho y del alto de la pantalla (svh), para que
+ * el hero completo quepa en la primera pantalla también en laptops con poca altura.
+ */
+@utility text-hero {
+  font-size: clamp(1.9rem, min(10.5vw, 5svh), 2.75rem);
+  line-height: 1.05;
+  @media (min-width: 640px) {
+    font-size: clamp(2.5rem, min(7.8vw, 6svh), 4rem);
+  }
+  @media (min-width: 1024px) and (orientation: landscape) {
+    font-size: clamp(2.25rem, min(4.6vw, 7.2svh), 4.5rem);
   }
 }
 
