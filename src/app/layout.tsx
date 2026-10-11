@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import { MotionProvider } from "@/components/client/motion/MotionProvider";
@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { MAIN_CONTENT_ID, SkipLink } from "@/components/layout/SkipLink";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { siteConfig } from "@/config/site";
+import { buildProfessionalServiceJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -20,7 +21,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.owner, url: siteConfig.url }],
+  formatDetection: { telephone: false },
 };
+
+// Mismo valor que el token --color-bg de globals.css.
+export const viewport: Viewport = { themeColor: "#06060f", colorScheme: "dark" };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -39,6 +46,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer />
         </MotionProvider>
         <WhatsAppFloat />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: buildProfessionalServiceJsonLd() }}
+        />
       </body>
     </html>
   );

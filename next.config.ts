@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
     REACT_APP_EMAILJS_TEMPLATE_ID: process.env.REACT_APP_EMAILJS_TEMPLATE_ID ?? "",
     REACT_APP_EMAILJS_PUBLIC_KEY: process.env.REACT_APP_EMAILJS_PUBLIC_KEY ?? "",
   },
+  // Rutas del sitio anterior (Create React App) que ya no existen: los enlaces compartidos
+  // siguen funcionando. /servicios y /contacto conservan su ruta.
+  async redirects() {
+    return [
+      { source: "/inicio", destination: "/", permanent: true },
+      { source: "/curriculum", destination: "/nosotros", permanent: true },
+    ];
+  },
   turbopack: {
     rules: {
       "*.css": {
