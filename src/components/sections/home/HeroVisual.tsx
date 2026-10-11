@@ -14,7 +14,7 @@ export function HeroVisual() {
     <div
       role="group"
       aria-label={hero.visualLabel}
-      className="relative mx-auto w-full max-w-xl animate-fade-up pb-[18%] [animation-delay:200ms] lg:max-w-none"
+      className="relative mx-auto mt-6 mb-section w-full max-w-xl animate-fade-up pb-[18%] [animation-delay:200ms] lg:my-0 lg:max-w-none"
     >
       <Parallax distance={-30} className="ml-auto w-[90%]">
         <BrowserFrame

@@ -11,7 +11,7 @@ const titleClasses = "mb-2 font-display text-sm font-semibold text-ink";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-bg-alt pt-16 pb-28 md:pb-12">
+    <footer className="border-t border-line bg-bg-alt pt-16 pb-[calc(7rem+env(safe-area-inset-bottom))] md:pb-12">
       <Container>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.3fr]">
           <div>

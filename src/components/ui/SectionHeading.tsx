@@ -18,7 +18,7 @@ export function SectionHeading({
   const centered = align === "center";
 
   return (
-    <div className={cn("mb-12 max-w-3xl md:mb-16", centered && "mx-auto text-center", className)}>
+    <div className={cn("mb-9 max-w-3xl md:mb-14", centered && "mx-auto text-center", className)}>
       <p className="mb-4 inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.18em] text-accent-light uppercase">
         <span aria-hidden="true" className="h-px w-6 bg-accent-light" />
         {heading.eyebrow}

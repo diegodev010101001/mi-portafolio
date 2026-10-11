@@ -41,7 +41,8 @@
 
   --spacing-header: 4.5rem;
   --spacing-gutter: clamp(1.25rem, 5vw, 3.75rem);
-  --spacing-section: clamp(4.5rem, 10vw, 8rem);
+  /* Única escala de espacio vertical entre secciones: compacta en móvil, amplia en escritorio. */
+  --spacing-section: clamp(3.5rem, 8vw, 7rem);
   --spacing-touch: 2.75rem;
 
   --container-site: 75rem;

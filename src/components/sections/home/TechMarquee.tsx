@@ -7,7 +7,7 @@ import { technologies, technologiesContent } from "@/data/technologies";
 
 export function TechMarquee() {
   return (
-    <section className="border-y border-line bg-bg-alt py-16">
+    <section className="border-y border-line bg-bg-alt py-section">
       <Reveal>
         <Container className="mb-10 text-center">
           <h2 className="mx-auto max-w-2xl font-display text-xl font-semibold text-balance text-ink sm:text-2xl">
