@@ -15,6 +15,11 @@ export interface Feature {
   description: string;
 }
 
+/** Problema típico de un negocio y cómo lo resuelve su sitio web. */
+export interface Problem extends Feature {
+  solution: string;
+}
+
 export interface Cta {
   label: string;
   href: string;
