@@ -10,9 +10,8 @@ export const siteConfig = {
   description:
     "Diseño y desarrollo páginas web a la medida para negocios de cualquier giro: sitios profesionales y sitios con sistema de citas en línea. Desde Aguascalientes, México, para clientes de cualquier ciudad o país.",
   footerPitch:
-    "Páginas web a la medida para que tu negocio se vea profesional, aparezca en Google y reciba clientes todos los días.",
+    "Páginas web a la medida para que tu negocio se vea profesional, sea fácil de encontrar y tus clientes te contacten con un toque.",
   location: "Aguascalientes, México",
-  remoteNote: "Trabajo 100 % remoto con clientes de cualquier ciudad o país",
   phoneDisplay: "449 155 9359",
   phoneE164: "+524491559359",
   whatsappNumber: "524491559359",

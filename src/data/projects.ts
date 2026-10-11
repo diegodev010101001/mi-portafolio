@@ -94,7 +94,6 @@ export const projectsContent = {
     technologies: "Tecnologías",
     visit: "Visitar el sitio",
     caseLink: "Ver el caso",
-    service: "Servicio",
   },
   cta: {
     title: "¿Quieres un sitio así para tu negocio?",

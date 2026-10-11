@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { Button } from "@/components/ui/Button";
 import { CheckList } from "@/components/ui/CheckList";
+import { FadeUp } from "@/components/ui/FadeUp";
 import { Icon } from "@/components/ui/Icon";
 import { PhoneFrame } from "@/components/ui/PhoneFrame";
 import { projectsContent } from "@/data/projects";
@@ -16,11 +17,15 @@ interface ProjectCaseProps {
   project: Project;
   /** Invierte las columnas para alternar el ritmo entre casos. */
   reversed: boolean;
+  /** El primer caso queda en la primera pantalla: se anima con CSS en lugar de Motion. */
+  firstScreen: boolean;
 }
 
-export function ProjectCase({ project, reversed }: ProjectCaseProps) {
+export function ProjectCase({ project, reversed, firstScreen }: ProjectCaseProps) {
+  const Wrapper = firstScreen ? FadeUp : Reveal;
+
   return (
-    <Reveal>
+    <Wrapper>
       <article id={project.slug} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div className={cn("relative", reversed && "lg:order-2")}>
           <BrowserFrame
@@ -62,6 +67,6 @@ export function ProjectCase({ project, reversed }: ProjectCaseProps) {
           )}
         </div>
       </article>
-    </Reveal>
+    </Wrapper>
   );
 }

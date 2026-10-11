@@ -17,7 +17,6 @@ export interface SiteConfig {
   description: string;
   footerPitch: string;
   location: string;
-  remoteNote: string;
   phoneDisplay: string;
   phoneE164: string;
   whatsappNumber: string;

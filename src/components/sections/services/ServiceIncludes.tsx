@@ -1,4 +1,3 @@
-import { Reveal } from "@/components/client/motion/Reveal";
 import { FeatureGrid } from "@/components/sections/shared/FeatureGrid";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -14,10 +13,12 @@ export function ServiceIncludes({ service }: ServiceIncludesProps) {
 
   return (
     <Section className="pt-6">
-      <Reveal>
-        <SectionHeading heading={heading} />
-      </Reveal>
-      <FeatureGrid items={service.includes} columns={service.includes.length % 3 === 0 ? 3 : 4} />
+      <SectionHeading heading={heading} className="animate-fade-up [animation-delay:80ms]" />
+      <FeatureGrid
+        items={service.includes}
+        columns={service.includes.length % 3 === 0 ? 3 : 4}
+        animation="css"
+      />
     </Section>
   );
 }

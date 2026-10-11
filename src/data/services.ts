@@ -300,11 +300,6 @@ export const servicesContent = {
   labels: {
     details: "Ver todo lo que incluye",
     quote: "Cotizar",
-    includesTitle: "Qué incluye",
-    flowsTitle: "Cómo funciona",
-    idealTitle: "Ideal para",
-    relatedProjectTitle: "Un proyecto real con este servicio",
-    faqTitle: "Preguntas sobre este servicio",
     seeSolutions: "Ver soluciones por giro",
     allServices: "Todos los servicios",
   },
