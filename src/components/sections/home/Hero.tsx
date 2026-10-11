@@ -28,8 +28,9 @@ export function Hero() {
             secondary={hero.badge.location}
             className="animate-fade-up self-start"
           />
-          <h1 className="mt-6 animate-fade-up font-display text-[2.6rem] leading-[1.05] short-phone:mt-4 short-phone:text-[2rem] font-bold tracking-tight text-balance [animation-delay:80ms] sm:text-6xl xl:text-7xl">
-            <HighlightedTitle title={hero.title} highlight={hero.highlight} />
+          {/* Sin animación de entrada: el título se pinta completo desde el primer momento. */}
+          <h1 className="mt-6 font-display text-[2.6rem] leading-[1.05] font-bold tracking-tight text-balance short-phone:mt-4 short-phone:text-[2rem] sm:text-6xl xl:text-7xl">
+            <HighlightedTitle title={hero.title} highlight={hero.highlight} live />
           </h1>
           <p className="mt-6 max-w-xl animate-fade-up text-lg text-pretty text-ink-dim [animation-delay:160ms] short-phone:mt-4 short-phone:text-base short-phone:leading-normal">
             {hero.subtitle}
