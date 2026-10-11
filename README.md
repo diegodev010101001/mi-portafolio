@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Diego Fernández Web
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sitio de servicios de desarrollo web de Diego Fernández: https://diegofdev.vercel.app
 
-## Available Scripts
+Next.js (App Router) + TypeScript + Tailwind CSS + Motion.
 
-In the project directory, you can run:
+## Desarrollo
 
-### `npm start`
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build
+npm run lint
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Requiere Node 22.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Dónde cambiar cada cosa
 
-### `npm test`
+- `src/config/site.ts`: marca, URL, teléfono, WhatsApp, correo y redes.
+- `src/config/navigation.ts`: enlaces del menú y del footer.
+- `src/data/`: todo el contenido del sitio (servicios, giros, proceso, proyectos, preguntas frecuentes, textos de cada página).
+- `src/app/globals.css`: tokens de diseño (colores, degradado, radios, sombras).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Los pendientes por confirmar están marcados con `TODO(Diego)`.
 
-### `npm run build`
+## Formulario de contacto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Usa EmailJS desde el navegador. Necesita estas variables en `.env` (local) y en Vercel:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `REACT_APP_EMAILJS_SERVICE_ID`
+- `REACT_APP_EMAILJS_TEMPLATE_ID`
+- `REACT_APP_EMAILJS_PUBLIC_KEY`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Conservan el prefijo `REACT_APP_` a propósito; `next.config.ts` las expone al navegador.
