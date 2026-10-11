@@ -1,5 +1,6 @@
 import type { ContactField, ContactFormMessages, ContactFormValues } from "@/types";
 import { privacyLink } from "./navigation";
+import { siteConfig } from "./site";
 
 /**
  * Credenciales de EmailJS. Cada variable se lee con su expresión literal completa
@@ -51,6 +52,15 @@ export const contactFields = [
   },
 ] satisfies ContactField[];
 
+/**
+ * Protecciones de EmailJS contra envíos automáticos: rechaza navegadores sin interfaz y
+ * permite un envío cada `throttle` milisegundos por navegador.
+ */
+export const emailJsProtection = {
+  blockHeadless: true,
+  limitRate: { throttle: 10000 },
+};
+
 export const emptyContactForm: ContactFormValues = {
   nombre: "",
   apellidos: "",
@@ -64,7 +74,7 @@ export const contactFormMessages = {
   success: "¡Mensaje enviado correctamente! Gracias por escribirme.",
   error:
     "No se pudo enviar tu mensaje. Inténtalo de nuevo o escríbeme por WhatsApp o por correo.",
-  privacyPrefix: "Al enviar este formulario aceptas el",
-  privacyLinkLabel: privacyLink.label.toLowerCase(),
+  privacyNotice: `Responsable: ${siteConfig.legalName}, ${siteConfig.location}. Uso tu nombre, apellidos, correo y mensaje solo para responder tu solicitud, darle seguimiento y preparar tu propuesta. Puedes limitar su uso escribiendo a ${siteConfig.email}.`,
+  privacyLinkLabel: "Consulta el aviso de privacidad completo",
   privacyHref: privacyLink.href,
 } satisfies ContactFormMessages;

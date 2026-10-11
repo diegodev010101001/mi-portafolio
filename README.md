@@ -26,10 +26,6 @@ Los pendientes por confirmar están marcados con `TODO(Diego)`.
 
 ## Formulario de contacto
 
-Usa EmailJS desde el navegador. Necesita estas variables en `.env` (local) y en Vercel:
-
-- `REACT_APP_EMAILJS_SERVICE_ID`
-- `REACT_APP_EMAILJS_TEMPLATE_ID`
-- `REACT_APP_EMAILJS_PUBLIC_KEY`
-
-Conservan el prefijo `REACT_APP_` a propósito; `next.config.ts` las expone al navegador.
+Usa EmailJS desde el navegador. Necesita tres variables de entorno en `.env` (local) y en Vercel;
+sus nombres están en `src/config/contact-form.ts`. Conservan el prefijo de Create React App a
+propósito: `next.config.ts` las expone al navegador. El archivo `.env` nunca se sube al repositorio.

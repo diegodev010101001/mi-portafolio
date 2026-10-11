@@ -25,6 +25,12 @@
 *.tsbuildinfo
 next-env.d.ts
 
+# archivos locales de trabajo con asistentes
+PROMPT_REDISENO.md
+.claude/
+.agents/
+skills-lock.json
+
 # misc
 .DS_Store
 *.pem

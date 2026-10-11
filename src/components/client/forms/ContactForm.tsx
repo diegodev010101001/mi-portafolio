@@ -9,6 +9,7 @@ import {
   contactFields,
   contactFormMessages as messages,
   emailJsConfig,
+  emailJsProtection,
   emptyContactForm,
 } from "@/config/contact-form";
 import { cn } from "@/lib/utils";
@@ -32,7 +33,9 @@ export function ContactForm() {
 
     if (!serviceId || !templateId || !publicKey) {
       if (process.env.NODE_ENV === "development") {
-        console.warn("Formulario de contacto: falta alguna variable REACT_APP_EMAILJS_* en .env.");
+        console.warn(
+          "Formulario de contacto: falta alguna variable de EmailJS en .env (ver src/config/contact-form.ts).",
+        );
       }
       setStatus("error");
       return;
@@ -49,7 +52,7 @@ export function ContactForm() {
           email: form.email,
           mensaje: form.mensaje,
         },
-        publicKey,
+        { publicKey, ...emailJsProtection },
       );
       setForm(emptyContactForm);
       setStatus("success");
@@ -71,8 +74,8 @@ export function ContactForm() {
           <Icon name="mail" className="size-5" />
           {isSending ? messages.sending : messages.submit}
         </Button>
-        <p className="mt-3 text-center text-sm text-ink-muted">
-          {messages.privacyPrefix}{" "}
+        <p className="mt-4 text-xs text-pretty text-ink-muted">
+          {messages.privacyNotice}{" "}
           <Link href={messages.privacyHref} className="text-accent-light underline hover:text-cyan">
             {messages.privacyLinkLabel}
           </Link>

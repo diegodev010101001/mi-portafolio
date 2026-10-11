@@ -10,6 +10,7 @@ export interface SiteConfig {
   name: string;
   wordmark: { accent: string; rest: string };
   owner: string;
+  legalName: string;
   url: string;
   locale: string;
   ogLocale: string;

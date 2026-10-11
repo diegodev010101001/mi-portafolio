@@ -17,7 +17,8 @@ export interface ContactFormMessages {
   sending: string;
   success: string;
   error: string;
-  privacyPrefix: string;
+  /** Aviso de privacidad simplificado que se muestra bajo el botón de enviar. */
+  privacyNotice: string;
   privacyLinkLabel: string;
   privacyHref: string;
 }

@@ -5,6 +5,8 @@ export const siteConfig = {
   /** Partes del logotipo de texto: la primera va en el color de acento. */
   wordmark: { accent: "Diego", rest: "Dev" },
   owner: "Diego Fernández",
+  /** Nombre completo del responsable, para los textos legales. */
+  legalName: "Diego Fernández Martínez",
   url: "https://diegofdev.vercel.app",
   locale: "es-MX",
   ogLocale: "es_MX",
