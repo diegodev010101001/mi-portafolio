@@ -1,1 +1,209 @@
 @import "tailwindcss";
+
+/* ============================================================
+   Tokens de diseño: única fuente de colores, tipografía, radios,
+   sombras, espaciados y anchos. Los componentes solo usan estas
+   utilidades (bg-bg, text-ink, rounded-card, px-gutter…).
+   ============================================================ */
+@theme {
+  --color-bg: #06060f;
+  --color-bg-alt: #09091a;
+  --color-surface: rgb(255 255 255 / 0.03);
+  --color-surface-strong: rgb(255 255 255 / 0.06);
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --color-line-accent: rgb(77 124 255 / 0.32);
+
+  --color-accent: #4d7cff;
+  --color-accent-light: #7da3ff;
+  --color-accent-soft: rgb(77 124 255 / 0.1);
+  --color-violet: #a78bfa;
+  --color-cyan: #60efff;
+
+  --color-ink: #e2e8f0;
+  --color-ink-dim: #a3b0c4;
+  --color-ink-muted: #8492a8;
+  --color-on-accent: #06060f;
+
+  --color-whatsapp: #25d366;
+  --color-success: #4dff96;
+  --color-danger: #ff9b9b;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-field: 14px;
+  --radius-card: 22px;
+
+  --shadow-card: 0 4px 40px rgb(0 0 0 / 0.45);
+  --shadow-glow: 0 0 40px rgb(77 124 255 / 0.18);
+  --shadow-glow-strong: 0 8px 36px rgb(77 124 255 / 0.38);
+
+  --spacing-header: 4.5rem;
+  --spacing-gutter: clamp(1.25rem, 5vw, 3.75rem);
+  --spacing-section: clamp(4.5rem, 10vw, 8rem);
+  --spacing-touch: 2.75rem;
+
+  --container-site: 75rem;
+  --container-prose: 44rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-up: fade-up 0.8s var(--ease-out-expo) both;
+  --animate-aurora: aurora 16s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+  }
+  @keyframes aurora {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+      transform: translate3d(4%, -5%, 0) scale(1.06);
+    }
+    66% {
+      transform: translate3d(-3%, 4%, 0) scale(0.96);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -10px;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale(1.7);
+      opacity: 0;
+    }
+  }
+  @keyframes pulse-dot {
+    50% {
+      opacity: 0.45;
+      transform: scale(0.7);
+    }
+  }
+}
+
+:root {
+  --gradient-brand: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-violet) 55%,
+    var(--color-cyan) 100%
+  );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--spacing-header) + 1rem);
+    background: var(--color-bg);
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    overflow-x: clip;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Utilidades de marca
+   ============================================================ */
+@utility bg-brand-gradient {
+  background-image: var(--gradient-brand);
+}
+
+@utility text-gradient {
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Borde en degradado que aparece al pasar el cursor o enfocar. */
+@utility border-gradient-hover {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--gradient-brand);
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-out-expo);
+    pointer-events: none;
+  }
+  &:hover::before,
+  &:focus-within::before {
+    opacity: 1;
+  }
+}
+
+/* Cuadrícula tenue del hero. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 40%, #000 15%, transparent 100%);
+  opacity: 0.45;
+}
+
+/* Los bordes del carrusel se desvanecen. */
+@utility mask-fade-x {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}
