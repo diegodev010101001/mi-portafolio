@@ -47,23 +47,26 @@ export function MobileMenu({ items, labels, actions }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label={labels.dialog}
-            className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-bg/97 px-gutter pt-[calc(var(--spacing-header)+1.5rem)] pb-[calc(2rem+env(safe-area-inset-bottom))] backdrop-blur-xl"
+            className="fixed inset-0 z-40 flex flex-col overflow-y-auto overscroll-contain bg-bg/97 px-gutter pt-header pb-[env(safe-area-inset-bottom)] backdrop-blur-xl"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
           >
-            <nav aria-label={labels.dialog}>
-              <ul className="flex flex-col gap-2">
-                {items.map((item) => (
-                  <li key={item.href}>
-                    <NavLink {...item} variant="mobile" onNavigate={close} />
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <div onClick={close} className="mt-auto flex flex-col gap-3 pt-10">
-              {actions}
+            {/* m-auto centra el bloque cuando cabe y deja hacer scroll cuando la pantalla es bajita. */}
+            <div className="m-auto flex w-full max-w-sm flex-col items-center gap-10 py-8 text-center">
+              <nav aria-label={labels.dialog}>
+                <ul className="flex flex-col items-center gap-2">
+                  {items.map((item) => (
+                    <li key={item.href}>
+                      <NavLink {...item} variant="mobile" onNavigate={close} />
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <div onClick={close} className="flex w-full flex-col gap-3">
+                {actions}
+              </div>
             </div>
           </m.div>
         )}
