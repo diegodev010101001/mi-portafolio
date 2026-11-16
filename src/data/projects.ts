@@ -101,7 +101,7 @@ export const projects: Project[] = [
     },
     domain: ejemplosUrl?.host,
     url: ejemplosUrl?.href,
-    visitLabel: "Ver ejemplo en vivo",
+    visitLabel: "Visitar sitio",
     pendingLabel: "Próximamente",
     featured: true,
   },
