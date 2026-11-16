@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Reveal } from "@/components/client/motion/Reveal";
+import { Reveal } from "@/components/scroll/Reveal";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -8,7 +8,7 @@ import { education } from "@/data/technologies";
 
 export function EducationBlock() {
   return (
-    <Section tone="alt">
+    <Section>
       <Reveal>
         <SectionHeading heading={educationHeading} />
         <Card interactive={false} className="flex max-w-3xl flex-col gap-6 sm:flex-row sm:items-center">

@@ -8,14 +8,24 @@ import type { Service } from "@/types";
 
 interface ServiceOverviewCardProps {
   service: Service;
+  /** Posición del servicio en la lista: se muestra como número grande de fondo. */
+  number: number;
 }
 
-export function ServiceOverviewCard({ service }: ServiceOverviewCardProps) {
+export function ServiceOverviewCard({ service, number }: ServiceOverviewCardProps) {
   return (
-    <Card as="article" id={service.slug} className="flex h-full flex-col">
-      <IconTile name={service.icon} />
-      <h2 className="mt-5 font-display text-2xl font-bold text-ink">{service.name}</h2>
-      <p className="mt-3 text-ink-dim">{service.description}</p>
+    <Card as="article" id={service.slug} spot className="flex h-full flex-col overflow-clip">
+      {/* Número decorativo que se desplaza con el scroll (parallax). */}
+      <span
+        aria-hidden="true"
+        data-parallax="16"
+        className="pointer-events-none absolute top-3 right-5 font-display text-[4.5rem] leading-none font-bold text-outline select-none sm:text-[6.5rem] lg:text-[7.5rem]"
+      >
+        {String(number).padStart(2, "0")}
+      </span>
+      <IconTile name={service.icon} className="relative" />
+      <h2 className="relative mt-5 font-display text-2xl font-bold text-ink">{service.name}</h2>
+      <p className="relative mt-3 text-ink-dim">{service.description}</p>
       <p className="mt-3 text-sm text-ink-muted">{service.idealFor}</p>
       {service.includesNote && (
         <p className="mt-6 text-sm font-semibold text-ink">{service.includesNote}</p>

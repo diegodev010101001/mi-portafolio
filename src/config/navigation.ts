@@ -10,7 +10,12 @@ export const mainNav = [
   { label: "Nosotros", href: "/nosotros" },
 ] satisfies NavItem[];
 
-export const quoteCta = { label: "Cotizar proyecto", href: "/contacto" } satisfies Cta;
+export const quoteCta = {
+  label: "Cotizar proyecto",
+  /** Versión corta para el header en celulares, donde no cabe el texto completo. */
+  shortLabel: "Cotizar",
+  href: "/contacto",
+} satisfies Cta & { shortLabel: string };
 
 export const privacyLink = {
   label: "Aviso de privacidad",

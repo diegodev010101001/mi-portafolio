@@ -5,7 +5,7 @@ import { ServiceFlows } from "@/components/sections/services/ServiceFlows";
 import { ServiceIncludes } from "@/components/sections/services/ServiceIncludes";
 import { ServiceIndustries } from "@/components/sections/services/ServiceIndustries";
 import { ServiceRelatedProject } from "@/components/sections/services/ServiceRelatedProject";
-import { CtaBanner } from "@/components/sections/shared/CtaBanner";
+import { ClosingCta } from "@/components/sections/shared/ClosingCta";
 import { FaqSection } from "@/components/sections/shared/FaqSection";
 import { finalCta } from "@/data/home";
 import { getService, services, servicesContent } from "@/data/services";
@@ -40,7 +40,7 @@ export default async function ServicePage({ params }: PageProps<"/servicios/[slu
       <ServiceIndustries service={service} />
       <ServiceRelatedProject service={service} />
       <FaqSection heading={servicesContent.detailHeadings.faq} items={service.faqs} />
-      <CtaBanner content={{ ...finalCta, whatsappMessage: service.whatsappMessage }} />
+      <ClosingCta content={{ ...finalCta, whatsappMessage: service.whatsappMessage }} />
     </>
   );
 }

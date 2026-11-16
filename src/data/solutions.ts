@@ -195,9 +195,12 @@ export const solutionsContent = {
     description:
       "Cada giro tiene sus propios problemas. Encuentra el tuyo y mira qué tendría tu sitio web para resolverlos.",
   } satisfies Heading,
-  filter: {
-    label: "Filtrar por categoría",
-    all: "Todos",
+  /** Escenario de /soluciones: una pantalla por giro, agrupadas por categoría. */
+  stage: {
+    label: "Soluciones por tipo de negocio",
+    categories: "Ir a una categoría",
+    solution: "Solución",
+    of: "de",
   },
   card: {
     problemLabel: "El problema",

@@ -22,6 +22,20 @@ export const hero = {
     { icon: "user-check", label: "Trato directo conmigo" },
   ] as const,
   visualLabel: "Sitios web que he desarrollado",
+  /** Texto del indicador de scroll (decorativo). */
+  scrollCue: "Desliza",
+};
+
+/** Textos del escenario de capítulos: una pantalla por cada ruta del menú principal. */
+export const homeChapters = {
+  label: "El sitio en cinco capítulos",
+  navLabel: "Capítulos",
+  chapter: "Capítulo",
+  of: "de",
+  goTo: "Ir al capítulo",
+  more: "Ver más",
+  /** Completa el botón para lectores de pantalla: "Ver más sobre Servicios". */
+  moreAbout: "sobre",
 };
 
 export const problems = {
@@ -133,6 +147,9 @@ export const aboutTeaser = {
   ],
   link: "Conóceme",
 };
+
+/** Línea del correo en la llamada a la acción de cierre. */
+export const closingEmailLabel = "O escríbeme por correo:";
 
 export const finalCta = {
   title: "Hagamos el sitio web de tu negocio",

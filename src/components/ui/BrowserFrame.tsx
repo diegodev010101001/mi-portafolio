@@ -6,12 +6,31 @@ interface BrowserFrameProps {
   image: ImageAsset;
   sizes: string;
   domain?: string;
-  /** Solo para la imagen principal del hero. */
+  /** Solo para la imagen principal de la primera pantalla: se precarga. */
   preload?: boolean;
+  /** `eager` para imágenes que también se ven en la primera pantalla (sin precargarlas). */
+  loading?: "eager" | "lazy";
   className?: string;
 }
 
-export function BrowserFrame({ image, sizes, domain, preload = false, className }: BrowserFrameProps) {
+/**
+ * Marcador mientras carga una imagen diferida: el mismo color de fondo del marco (bg-alt),
+ * para que no se vea un hueco. Además evita un aviso falso de Next en desarrollo cuando la
+ * misma imagen aparece arriba (temprana) y más abajo (diferida).
+ */
+const LAZY_PLACEHOLDER =
+  "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%2309091a'/%3E%3C/svg%3E";
+
+export function BrowserFrame({
+  image,
+  sizes,
+  domain,
+  preload = false,
+  loading = "lazy",
+  className,
+}: BrowserFrameProps) {
+  const isLazy = !preload && loading === "lazy";
+
   return (
     <div
       className={cn(
@@ -38,6 +57,8 @@ export function BrowserFrame({ image, sizes, domain, preload = false, className 
         height={image.height}
         sizes={sizes}
         preload={preload}
+        loading={preload ? undefined : loading}
+        placeholder={isLazy ? LAZY_PLACEHOLDER : "empty"}
         className="h-auto w-full"
       />
     </div>

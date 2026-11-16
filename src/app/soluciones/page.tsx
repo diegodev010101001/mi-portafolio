@@ -1,6 +1,6 @@
-import { CtaBanner } from "@/components/sections/shared/CtaBanner";
+import { ClosingCta } from "@/components/sections/shared/ClosingCta";
 import { PageHero } from "@/components/sections/shared/PageHero";
-import { SolutionsGrid } from "@/components/sections/solutions/SolutionsGrid";
+import { SolutionsStage } from "@/components/sections/solutions/SolutionsStage";
 import { solutionsContent } from "@/data/solutions";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -10,8 +10,8 @@ export default function SolutionsPage() {
   return (
     <>
       <PageHero heading={solutionsContent.hero} />
-      <SolutionsGrid />
-      <CtaBanner content={solutionsContent.closing} />
+      <SolutionsStage />
+      <ClosingCta content={solutionsContent.closing} />
     </>
   );
 }

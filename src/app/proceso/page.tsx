@@ -1,5 +1,5 @@
 import { ProcessTimeline } from "@/components/sections/process/ProcessTimeline";
-import { CtaBanner } from "@/components/sections/shared/CtaBanner";
+import { ClosingCta } from "@/components/sections/shared/ClosingCta";
 import { FaqSection } from "@/components/sections/shared/FaqSection";
 import { FeatureSection } from "@/components/sections/shared/FeatureSection";
 import { PageHero } from "@/components/sections/shared/PageHero";
@@ -18,7 +18,7 @@ export default function ProcessPage() {
       <FeatureSection heading={processContent.needs} items={processNeeds} tone="alt" />
       <FeatureSection heading={processContent.deliverables} items={processDeliverables} columns={4} />
       <FaqSection heading={faqHeading} items={generalFaqs} tone="alt" />
-      <CtaBanner content={finalCta} />
+      <ClosingCta content={finalCta} />
     </>
   );
 }

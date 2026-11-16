@@ -1,4 +1,5 @@
 import { useEffect, type RefObject } from "react";
+import { lockScroll, unlockScroll } from "@/lib/smooth-scroll";
 
 const FOCUSABLE = "a[href], button:not([disabled])";
 
@@ -39,9 +40,11 @@ export function useMenuDialog(
     };
 
     document.body.style.overflow = "hidden";
+    lockScroll();
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = "";
+      unlockScroll();
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [isOpen, containerRef, onClose]);

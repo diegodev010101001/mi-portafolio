@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 
-const blob = "absolute rounded-full blur-3xl animate-aurora";
+/** En celular las manchas se quedan quietas: animar capas con blur grande cuesta en gama media. */
+const blob = "absolute rounded-full blur-3xl md:animate-aurora";
 
 interface HeroBackdropProps {
   /** `soft` reduce la intensidad para los encabezados de páginas interiores. */

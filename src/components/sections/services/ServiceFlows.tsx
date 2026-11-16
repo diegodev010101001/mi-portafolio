@@ -1,5 +1,4 @@
-import { Reveal } from "@/components/client/motion/Reveal";
-import { Stagger, StaggerItem } from "@/components/client/motion/Stagger";
+import { Reveal, Stagger, StaggerItem } from "@/components/scroll/Reveal";
 import { StepList } from "@/components/sections/shared/StepList";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";

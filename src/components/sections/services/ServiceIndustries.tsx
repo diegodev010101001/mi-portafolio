@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/client/motion/Reveal";
+import { Reveal } from "@/components/scroll/Reveal";
 import { SolutionPills } from "@/components/sections/shared/SolutionPills";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";

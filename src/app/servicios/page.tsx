@@ -1,7 +1,7 @@
 import { CustomProjectBlock } from "@/components/sections/services/CustomProjectBlock";
 import { ServiceComparison } from "@/components/sections/services/ServiceComparison";
 import { ServicesList } from "@/components/sections/services/ServicesList";
-import { CtaBanner } from "@/components/sections/shared/CtaBanner";
+import { ClosingCta } from "@/components/sections/shared/ClosingCta";
 import { FaqSection } from "@/components/sections/shared/FaqSection";
 import { PageHero } from "@/components/sections/shared/PageHero";
 import { faqHeading, servicesFaqs } from "@/data/faqs";
@@ -19,7 +19,7 @@ export default function ServicesPage() {
       <ServiceComparison />
       <CustomProjectBlock />
       <FaqSection heading={faqHeading} items={servicesFaqs} tone="alt" />
-      <CtaBanner content={finalCta} />
+      <ClosingCta content={finalCta} />
     </>
   );
 }

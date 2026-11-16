@@ -76,7 +76,11 @@ export function ContactForm() {
         </Button>
         <p className="mt-4 text-xs text-pretty text-ink-muted">
           {messages.privacyNotice}{" "}
-          <Link href={messages.privacyHref} className="text-accent-light underline hover:text-cyan">
+          {/* inline-flex + min-h-touch: área táctil de 44 px sin separar el enlace del texto. */}
+          <Link
+            href={messages.privacyHref}
+            className="inline-flex min-h-touch items-center text-accent-light underline hover:text-cyan"
+          >
             {messages.privacyLinkLabel}
           </Link>
           .

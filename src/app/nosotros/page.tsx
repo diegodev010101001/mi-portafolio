@@ -1,7 +1,8 @@
 import { AboutIntro } from "@/components/sections/about/AboutIntro";
+import { AboutStory } from "@/components/sections/about/AboutStory";
 import { EducationBlock } from "@/components/sections/about/EducationBlock";
 import { Technologies } from "@/components/sections/about/Technologies";
-import { CtaBanner } from "@/components/sections/shared/CtaBanner";
+import { ClosingCta } from "@/components/sections/shared/ClosingCta";
 import { FeatureSection } from "@/components/sections/shared/FeatureSection";
 import { aboutSeo, remoteBlock, whyMe } from "@/data/about";
 import { finalCta } from "@/data/home";
@@ -13,11 +14,12 @@ export default function AboutPage() {
   return (
     <>
       <AboutIntro />
-      <FeatureSection heading={whyMe.heading} items={whyMe.items} tone="alt" />
-      <Technologies />
+      <AboutStory />
+      <FeatureSection heading={whyMe.heading} items={whyMe.items} />
+      <Technologies tone="alt" />
       <EducationBlock />
-      <FeatureSection heading={remoteBlock.heading} items={remoteBlock.items} />
-      <CtaBanner content={finalCta} />
+      <FeatureSection heading={remoteBlock.heading} items={remoteBlock.items} tone="alt" />
+      <ClosingCta content={finalCta} />
     </>
   );
 }

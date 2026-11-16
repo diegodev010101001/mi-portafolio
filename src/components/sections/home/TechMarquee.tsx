@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/client/motion/Reveal";
+import { Reveal } from "@/components/scroll/Reveal";
 import { TechnologyLogo } from "@/components/sections/shared/TechnologyLogo";
 import { Container } from "@/components/ui/Container";
 import { Marquee } from "@/components/ui/Marquee";

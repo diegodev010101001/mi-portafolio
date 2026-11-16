@@ -1,14 +1,13 @@
-import { Reveal } from "@/components/client/motion/Reveal";
-import { Stagger, StaggerItem } from "@/components/client/motion/Stagger";
+import { Reveal, Stagger, StaggerItem } from "@/components/scroll/Reveal";
 import { TechnologyLogo } from "@/components/sections/shared/TechnologyLogo";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { technologies, technologiesContent } from "@/data/technologies";
 
-export function Technologies() {
+export function Technologies({ tone }: { tone?: "default" | "alt" }) {
   return (
-    <Section id="tecnologias">
+    <Section id="tecnologias" tone={tone}>
       <Reveal>
         <SectionHeading heading={technologiesContent.section} />
       </Reveal>

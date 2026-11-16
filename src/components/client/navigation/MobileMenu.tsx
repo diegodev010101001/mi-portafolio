@@ -47,6 +47,7 @@ export function MobileMenu({ items, labels, actions }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label={labels.dialog}
+            data-lenis-prevent
             className="fixed inset-0 z-40 flex flex-col overflow-y-auto overscroll-contain bg-bg/97 px-gutter pt-header pb-[env(safe-area-inset-bottom)] backdrop-blur-xl"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}

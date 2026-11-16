@@ -1,5 +1,18 @@
+import { EJEMPLOS_URL } from "@/config/projects";
 import type { CtaContent, Heading, Project } from "@/types";
 import { whatsappLabels, whatsappMessages } from "./whatsapp-messages";
+
+/** EJEMPLOS_URL se acepta con o sin "https://"; si viene vacía, el proyecto no tiene enlace. */
+const ejemplosUrl = (() => {
+  const value = EJEMPLOS_URL.trim();
+  if (!value) return undefined;
+  const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  try {
+    return new URL(withProtocol);
+  } catch {
+    return undefined;
+  }
+})();
 
 // TODO(Diego): agrega aquí más casos cuando quieras mostrarlos (por ejemplo, otros clientes
 // con su autorización). Cada proyecto necesita una captura real en public/images.
@@ -62,6 +75,36 @@ export const projects: Project[] = [
     relatedService: "sitio-web-para-negocios",
     featured: true,
   },
+  // El enlace de este proyecto se controla con EJEMPLOS_URL (src/config/projects.ts).
+  // TODO(Diego): revisa `businessType`, `challenge` y `solution`: los redacté a partir de tu
+  // descripción y de lo que hace el sitio de ejemplos; ajústalos a como quieras contarlo.
+  {
+    slug: "ejemplos-animados",
+    name: "Ejemplos animados",
+    businessType: "Sitio de ejemplos de DiegoDev",
+    category: "Sitio con scrollytelling",
+    summary:
+      "Sitio de ejemplos con scrollytelling: una sola página que se transforma en cuatro negocios distintos (cafetería, gimnasio, clínica dental y taller). Muestra el tipo de experiencias animadas que puedo crear para tu negocio.",
+    challenge:
+      "Mostrar con un sitio que se pueda recorrer, y no solo con palabras, el tipo de experiencias animadas que puedo crear para un negocio.",
+    solution: [
+      "Una sola página que se transforma en cuatro negocios distintos",
+      "Cafetería, gimnasio, clínica dental y taller, cada uno con sus colores y su tipografía",
+      "Escenas que se quedan fijas y cambian conforme avanza el scroll",
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "GSAP", "Lenis"],
+    image: {
+      src: "/images/ejemplos-animados.webp",
+      alt: "Página de inicio del sitio de ejemplos animados, con el titular «Sitios web que le dan un giro a tu negocio» y una rueda con los cuatro giros",
+      width: 1600,
+      height: 850,
+    },
+    domain: ejemplosUrl?.host,
+    url: ejemplosUrl?.href,
+    visitLabel: "Ver ejemplo en vivo",
+    pendingLabel: "Próximamente",
+    featured: true,
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
@@ -89,11 +132,14 @@ export const projectsContent = {
   } satisfies Heading,
   featuredLink: "Ver todos los proyectos",
   labels: {
+    summary: "De qué se trata",
     challenge: "El reto",
     solution: "Qué hice",
     technologies: "Tecnologías",
     visit: "Visitar el sitio",
     caseLink: "Ver el caso",
+    /** Nombre de cada escena de /proyectos para lectores de pantalla. */
+    scene: "Proyecto",
   },
   cta: {
     title: "¿Quieres un sitio así para tu negocio?",

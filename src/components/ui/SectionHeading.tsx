@@ -1,6 +1,6 @@
+import { SplitWords } from "@/components/scroll/SplitWords";
 import { cn } from "@/lib/utils";
 import type { Heading } from "@/types";
-import { HighlightedTitle } from "./GradientText";
 
 interface SectionHeadingProps {
   heading: Heading;
@@ -23,13 +23,17 @@ export function SectionHeading({
         <span aria-hidden="true" className="h-px w-6 bg-accent-light" />
         {heading.eyebrow}
       </p>
+      {/* El h1 queda en la primera pantalla: sus palabras suben con CSS. Las del h2, con el scroll. */}
       <Title
+        data-words={Title === "h2" ? "" : undefined}
         className={cn(
           "font-display font-bold tracking-tight text-balance text-ink",
-          Title === "h1" ? "text-4xl sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl lg:text-5xl",
+          Title === "h1"
+            ? "words-rise text-4xl sm:text-5xl lg:text-6xl"
+            : "text-3xl sm:text-4xl lg:text-5xl",
         )}
       >
-        <HighlightedTitle title={heading.title} highlight={heading.highlight} />
+        <SplitWords text={heading.title} highlight={heading.highlight} />
       </Title>
       {heading.description && (
         <p className={cn("mt-5 text-lg text-pretty text-ink-dim", centered && "mx-auto max-w-2xl")}>

@@ -28,8 +28,11 @@ export function Header() {
           </ul>
         </nav>
         <div className="flex items-center gap-2">
-          <Button href={quoteCta.href} className="hidden sm:inline-flex">
-            {quoteCta.label}
+          <Button href={quoteCta.href} className="max-sm:px-4 max-sm:text-[0.8125rem]">
+            <span className="sm:hidden" aria-hidden="true">
+              {quoteCta.shortLabel}
+            </span>
+            <span className="max-sm:sr-only">{quoteCta.label}</span>
           </Button>
           <MobileMenu
             items={[homeLink, ...mainNav]}

@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSyncExternalStore } from "react";
+import { activeSection } from "@/lib/active-section";
 import { cn } from "@/lib/utils";
 
 const variants = {
   desktop:
-    "relative inline-flex min-h-touch items-center text-sm font-medium text-ink-dim transition-colors after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-gradient after:transition-transform after:duration-300 after:ease-out-expo hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100",
+    "relative inline-flex min-h-touch items-center text-sm font-medium text-ink-dim transition-colors after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-gradient after:transition-transform after:duration-300 after:ease-out-expo hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100 data-[section-active]:text-ink data-[section-active]:after:scale-x-100",
   mobile:
-    "inline-flex min-h-touch items-center font-display text-3xl font-bold tracking-tight text-ink-dim transition-colors hover:text-ink aria-[current=page]:text-gradient",
+    "inline-flex min-h-touch items-center font-display text-3xl font-bold tracking-tight text-ink-dim transition-colors hover:text-ink aria-[current=page]:text-gradient data-[section-active]:text-ink",
 };
 
 interface NavLinkProps {
@@ -21,11 +23,18 @@ interface NavLinkProps {
 export function NavLink({ href, label, variant, onNavigate }: NavLinkProps) {
   const pathname = usePathname();
   const isActive = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  // En el inicio, el escenario de capítulos publica cuál se está viendo.
+  const section = useSyncExternalStore(
+    activeSection.subscribe,
+    activeSection.get,
+    activeSection.getServerSnapshot,
+  );
 
   return (
     <Link
       href={href}
       aria-current={isActive ? "page" : undefined}
+      data-section-active={section === href ? "" : undefined}
       onClick={onNavigate}
       className={cn(variants[variant])}
     >

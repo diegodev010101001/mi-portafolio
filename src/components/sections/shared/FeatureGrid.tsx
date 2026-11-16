@@ -1,4 +1,4 @@
-import { Stagger, StaggerItem } from "@/components/client/motion/Stagger";
+import { Stagger, StaggerItem } from "@/components/scroll/Reveal";
 import { Card } from "@/components/ui/Card";
 import { FadeUp } from "@/components/ui/FadeUp";
 import { IconTile } from "@/components/ui/IconTile";

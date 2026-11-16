@@ -6,6 +6,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
  * Enlace flotante a WhatsApp: pulso y tooltip solo con CSS, sin JavaScript.
  * En móvil se oculta donde haya un elemento con `data-hide-whatsapp-float` (el formulario
  * de contacto) para no tapar el botón de enviar; ahí WhatsApp ya aparece como canal.
+ * En celulares bajitos aparece al empezar a bajar (`float-reveal-short`, globals.css).
  */
 export function WhatsAppFloat() {
   return (
@@ -14,7 +15,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={whatsappLabels.floatAria}
-      className="group fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 flex size-14 items-center justify-center rounded-full bg-whatsapp text-on-accent shadow-card transition-transform duration-200 hover:scale-105 max-md:[body:has([data-hide-whatsapp-float])_&]:hidden md:right-6 md:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]"
+      className="group float-reveal-short fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 flex size-14 items-center justify-center rounded-full bg-whatsapp text-on-accent shadow-card transition-transform duration-200 hover:scale-105 max-md:[body:has([data-hide-whatsapp-float])_&]:hidden md:right-6 md:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]"
     >
       <span aria-hidden="true" className="absolute inset-0 animate-pulse-ring rounded-full bg-whatsapp" />
       <SocialIcon name="whatsapp" className="relative size-7" />

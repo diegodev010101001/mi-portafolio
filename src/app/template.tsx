@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
-import { PageTransition } from "@/components/client/motion/PageTransition";
+import { PageMotion } from "@/components/client/scroll/PageMotion";
 
+/** Se vuelve a montar en cada navegación: reinicia el scroll y los efectos de la página. */
 export default function Template({ children }: { children: ReactNode }) {
-  return <PageTransition>{children}</PageTransition>;
+  return <PageMotion>{children}</PageMotion>;
 }

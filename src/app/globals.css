@@ -60,6 +60,8 @@
   --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
   --animate-blink: blink 1.1s step-end infinite;
+  --animate-word-rise: word-rise 0.85s var(--ease-out-expo) both;
+  --animate-scroll-cue: scroll-cue 2.2s var(--ease-out-expo) infinite;
 
   @keyframes fade-up {
     from {
@@ -119,6 +121,22 @@
       transform: scale(0.7);
     }
   }
+  /* Palabra que sube desde debajo de su máscara (títulos de la primera pantalla). */
+  @keyframes word-rise {
+    from {
+      transform: translateY(115%);
+    }
+  }
+  /* Indicador de scroll: una luz que recorre la línea de arriba abajo. */
+  @keyframes scroll-cue {
+    0% {
+      transform: translateY(-100%);
+    }
+    70%,
+    100% {
+      transform: translateY(100%);
+    }
+  }
 }
 
 /* Celulares de pantalla bajita (iPhone SE, 360×640): el hero se compacta para que quepan los botones. */
@@ -127,6 +145,28 @@
 @custom-variant hero-split (@media (min-width: 1024px) and (orientation: landscape));
 /* Tabletas en vertical con altura de sobra: texto y maquetas caben juntos en la primera pantalla. */
 @custom-variant hero-tall (@media (min-width: 740px) and (min-height: 1000px) and (orientation: portrait));
+
+/*
+ * Escenario con pantallas fijadas. `pinned:` aplica solo cuando JavaScript activó el modo
+ * fijado (ver src/lib/motion/stage.ts); sin JavaScript, con prefers-reduced-motion o en
+ * ventanas muy bajitas, los paneles quedan apilados como secciones normales.
+ */
+@custom-variant pinned (&:where([data-stage-mode="pinned"], [data-stage-mode="pinned"] *));
+/*
+ * Un panel fijado mide exactamente 100svh, así que su contenido se compacta según el alto
+ * del propio panel (container query), que no cambia cuando el celular oculta sus barras.
+ * `tight:` celulares y tabletas con poco alto; `low:` cualquier pantalla con poco alto.
+ */
+@custom-variant tight {
+  @container chapter (max-height: 700px) and (max-width: 1023.98px) {
+    @slot;
+  }
+}
+@custom-variant low {
+  @container chapter (max-height: 660px) {
+    @slot;
+  }
+}
 
 :root {
   --gradient-brand: linear-gradient(
@@ -139,9 +179,34 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: calc(var(--spacing-header) + 1rem);
     background: var(--color-bg);
+  }
+  /*
+   * Monitores grandes: todo el sitio está en rem, así que subir la base lo escala parejo
+   * (contenedor, tipografía y espacios) en vez de dejar una franja angosta al centro.
+   * Es un porcentaje: respeta el tamaño de letra que el usuario eligió en su navegador.
+   */
+  @media (min-width: 1800px) {
+    html {
+      font-size: 112.5%;
+    }
+  }
+  @media (min-width: 2300px) {
+    html {
+      font-size: 125%;
+    }
+  }
+  /* Scroll suave con Lenis (reglas mínimas de lenis/dist/lenis.css). */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+  .lenis [data-lenis-prevent] {
+    overscroll-behavior: contain;
   }
   body {
     background: var(--color-bg);
@@ -292,10 +357,192 @@
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+/* ============================================================
+   Scrollytelling
+   ============================================================ */
+
+/* Título de un capítulo: depende del ancho y del alto para caber en una pantalla fijada. */
+@utility text-chapter {
+  font-size: clamp(1.625rem, min(7.4vw, 4.4svh), 2.5rem);
+  line-height: 1.08;
+  @media (min-width: 1024px) {
+    font-size: clamp(2.25rem, min(3.9vw, 7svh), 4rem);
   }
+}
+
+/*
+ * Degradado para un fragmento dividido en palabras: cada palabra pinta solo su tramo
+ * (--hl-j de --hl-n), así el degradado se lee continuo aunque cada palabra se anime aparte.
+ */
+@utility text-gradient-slice {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-accent),
+    var(--color-violet) 55%,
+    var(--color-cyan)
+  );
+  background-size: calc(var(--hl-n, 1) * 100%) 100%;
+  background-position: calc(var(--hl-j, 0) / max(var(--hl-n, 1) - 1, 1) * 100%) 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Número grande de fondo, solo contorno. */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-line-strong);
+}
+
+@layer components {
+  /*
+   * Palabras con máscara (<SplitWords>): la interior sube desde abajo. El relleno con
+   * margen negativo evita que la máscara corte acentos y letras con rabo (g, p, y).
+   */
+  .word {
+    display: inline-block;
+    overflow: clip;
+    vertical-align: top;
+    padding: 0.12em 0.06em 0.2em;
+    margin: -0.12em -0.06em -0.2em;
+  }
+  .word-inner {
+    display: inline-block;
+  }
+  /* Primera pantalla: las palabras suben con CSS, sin esperar a JavaScript. */
+  .words-rise .word-inner {
+    animation: var(--animate-word-rise);
+    animation-delay: calc(var(--word-index, 0) * 55ms + 60ms);
+  }
+
+  /* Fondo de un panel: color base y dos luces del degradado de la marca, sin desenfoques. */
+  .panel-bg {
+    background:
+      radial-gradient(ellipse 70% 60% at var(--glow-a-at, 10% 0%), var(--glow-a) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 55% at var(--glow-b-at, 95% 100%), var(--glow-b) 0%, transparent 70%),
+      var(--tone-bg);
+  }
+  [data-tone="blue"] {
+    --tone-bg: #06060f;
+    --glow-a: rgb(77 124 255 / 0.3);
+    --glow-b: rgb(167 139 250 / 0.14);
+  }
+  [data-tone="violet"] {
+    --tone-bg: #0a081c;
+    --glow-a: rgb(167 139 250 / 0.3);
+    --glow-b: rgb(77 124 255 / 0.16);
+    --glow-a-at: 92% 4%;
+    --glow-b-at: 0% 100%;
+  }
+  [data-tone="cyan"] {
+    --tone-bg: #050d18;
+    --glow-a: rgb(96 239 255 / 0.2);
+    --glow-b: rgb(77 124 255 / 0.22);
+    --glow-a-at: 6% 100%;
+    --glow-b-at: 100% 0%;
+  }
+  [data-tone="indigo"] {
+    --tone-bg: #080a22;
+    --glow-a: rgb(77 124 255 / 0.34);
+    --glow-b: rgb(96 239 255 / 0.12);
+    --glow-a-at: 50% -10%;
+    --glow-b-at: 50% 110%;
+  }
+  [data-tone="aurora"] {
+    --tone-bg: #07071a;
+    --glow-a: rgb(167 139 250 / 0.26);
+    --glow-b: rgb(96 239 255 / 0.16);
+    --glow-a-at: 100% 45%;
+    --glow-b-at: 0% 40%;
+  }
+
+  /* Paneles que no se ven: sin animaciones en reposo y, si ya los taparon, sin pintarse. */
+  [data-stage-state="idle"] *,
+  [data-stage-state="covered"] * {
+    animation-play-state: paused !important;
+  }
+  [data-stage-state="covered"] {
+    opacity: 0;
+  }
+  [data-stage-state="live"] [data-stage-zoom],
+  [data-stage-state="active"] [data-stage-zoom] {
+    will-change: transform;
+  }
+
+  /* Cortina entre rutas: tapa la pantalla y sube para descubrir la página nueva. */
+  .route-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    pointer-events: none;
+    background: var(--color-bg-alt);
+    animation: curtain-out 0.8s var(--ease-out-expo) both;
+  }
+  .route-curtain::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--gradient-brand);
+  }
+
+  /*
+   * Foco de atención: al pasar el cursor o enfocar una tarjeta marcada con data-spot,
+   * las demás se atenúan para resaltar la activa.
+   */
+  [data-spot] {
+    transition:
+      opacity 0.35s var(--ease-out-expo),
+      translate 0.3s var(--ease-out-expo),
+      box-shadow 0.3s var(--ease-out-expo);
+  }
+  .spotlight:has([data-spot]:focus-within) [data-spot]:not(:focus-within) {
+    opacity: 0.45;
+  }
+  @media (hover: hover) {
+    .spotlight:has([data-spot]:hover) [data-spot]:not(:hover) {
+      opacity: 0.45;
+    }
+  }
+}
+
+/*
+ * Celulares bajitos: el botón flotante de WhatsApp tapaba los botones del hero. Ahí aparece
+ * al empezar a bajar (animación ligada al scroll, solo CSS). Donde el navegador no la
+ * soporta, o con movimiento reducido, se queda siempre visible, como antes.
+ */
+@keyframes float-reveal {
+  from {
+    opacity: 0;
+    translate: 0 1rem;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    visibility: visible;
+  }
+}
+@utility float-reveal-short {
+  @media (max-height: 700px) and (max-width: 639.98px) and (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      animation: float-reveal linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 35svh;
+    }
+  }
+}
+
+@keyframes curtain-out {
+  to {
+    transform: translateY(-101%);
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
