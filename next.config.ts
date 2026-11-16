@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // Política de avisos de actualización que muestran `next dev` y `next build`, y la que usa
+  // `next upgrade --agent` si no se le indica otra. "security" solo avisa cuando la versión
+  // instalada está afectada por un aviso de seguridad publicado; no actualiza nada por sí sola.
+  experimental: {
+    agentUpgrade: "security",
+  },
 };
 
 export default nextConfig;
